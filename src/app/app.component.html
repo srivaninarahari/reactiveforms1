@@ -35,6 +35,15 @@
              only numbers required</div>
       </div>
       <div class="form-group">
+          <input type="text" name="Number" class="form-control" formControlName="Number" >
+          <div *ngIf= "myform.controls['Number'].hasError('pattern')" class= "alert alert-danger"> 
+              only numbers required and accepts  up to 3 digitd</div>
+              
+
+      </div>
+      
+  
+      <div class="form-group">
         <select class="txt-box" name="gender"  formControlName="genderType" class="form-control" >
           <option [value]="genderType" [disabled]="true">Select Option </option>
             <option *ngFor="let genderType of genderArray" [ngValue]="genderType.value">
@@ -64,6 +73,7 @@
               <td>{{item.name}}</td>
               <td>{{item.lastName}}</td>
               <td>{{item.age}}</td>
+              <td>{{item.Number}}</td>
               <td>{{item.genderType}}</td>
             </tr>
           </tbody>
