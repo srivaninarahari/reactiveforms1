@@ -16,7 +16,7 @@ export class RootComponent {
   arrayList: any[] = [];
   genderArray: any[] = [];
   myform: FormGroup;
-  constructor(private _listService: ListService, private _dropDownService: DropDownService) { }
+  constructor(private _listService: ListService, private _dropDownService: DropDownService,private fb:FormBuilder) { }
 
   ngOnInit() {
     this.userDetail = {
@@ -25,13 +25,15 @@ export class RootComponent {
       age: '',
       genderType: '',
     }
-    this.myform = new FormGroup({
-     name: new  FormControl('sree',[Validators.required]),
-    lastName: new  FormControl('',[Validators.required]),
-    age:new  FormControl('',[Validators.required]),
-    genderType:new  FormControl('',[Validators.required]),
+    this.myform=this.fb.group(
+      {
+     name: new  FormControl('',[Validators.required,Validators.minLength(2),Validators.pattern('^[a-zA-Z]*$')]),
+    lastName: new  FormControl('',[Validators.required,Validators.minLength(2),Validators.pattern('^[a-zA-Z]*$')]),
+    age:new  FormControl('',[Validators.required,Validators.pattern('^[0-9]*$')]),
+    genderType:new  FormControl(''),
   
-    });
+    }
+  );
     this.genderArray = this._dropDownService.getDropDown();
   }
 

@@ -3,14 +3,36 @@
     <form [formGroup]="myform" (ngSubmit)="submit(myform.value)">
       <div class="form-group">
         <input type="text" name="name" class="form-control"formControlName="name">
-          
+        <div *ngIf= "myform.controls['name'].hasError('required')" class= "alert alert-danger"> Name required</div>
+        <div *ngIf= "myform.controls['name'].hasError('minlength')" class= "alert alert-danger">
+        Min two  letters required
+ 
+       </div>
+       <div *ngIf= "myform.controls['name'].hasError('pattern')" class= "alert alert-danger">
+        only letters required
+   
+         </div>
         
       </div>
       <div class="form-group">
         <input type="text" name="lastName" class="form-control" formControlName="lastName" >
+        <div *ngIf= "myform.controls['lastName'].hasError('required')" class= "alert alert-danger">
+          lastName  required</div>
+        <div *ngIf= "myform.controls['lastName'].hasError('minlength')" class= "alert alert-danger">
+          Min two  letters required
+   
+         </div>
+         <div *ngIf= "myform.controls['lastName'].hasError('pattern')" class= "alert alert-danger">
+            only letters required
+       
+             </div>
       </div>
       <div class="form-group">
         <input type="text" name="age" class="form-control" formControlName="age" >
+        <div *ngIf= "myform.controls['age'].hasError('required')" class= "alert alert-danger"> 
+          age required</div>
+          <div *ngIf= "myform.controls['age'].hasError('pattern')" class= "alert alert-danger"> 
+             only numbers required</div>
       </div>
       <div class="form-group">
         <select class="txt-box" name="gender"  formControlName="genderType" class="form-control" >
@@ -19,8 +41,10 @@
             {{genderType.value}}
             </option>
       </select>
+      <div *ngIf= "myform.controls['genderType'].hasError('required')" class= "alert alert-danger"> Name required</div>
+      
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]= "myform.invalid">Submit</button>
     </form>
 
     <hr/>
